@@ -15,8 +15,7 @@ module.exports = {
     '@src/(.*)': '<rootDir>/src/$1',
     '@tests/(.*)': '<rootDir>/tests/$1'
   },
-  // coveragePathIgnorePatterns: ['src/example'],
-  collectCoverageFrom: ['src/**/*.ts'],
+  collectCoverageFrom: ['src/**/*.ts', '!src/**/index.ts'],
   moduleFileExtensions: ['ts', 'js', 'json', 'node'],
   testMatch: ['<rootDir>/src/**/*.test.ts', '<rootDir>/tests/**/*.spec.ts'],
   preset: 'ts-jest',
