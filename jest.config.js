@@ -15,7 +15,11 @@ module.exports = {
     '@src/(.*)': '<rootDir>/src/$1',
     '@tests/(.*)': '<rootDir>/tests/$1'
   },
-  collectCoverageFrom: ['src/**/*.ts', '!src/**/index.ts'],
+  collectCoverageFrom: [
+    'src/**/*.ts',
+    '!src/**/index.ts',
+    '!src/presentation/controllers/signup/signup-protocols.ts'
+  ],
   moduleFileExtensions: ['ts', 'js', 'json', 'node'],
   testMatch: ['<rootDir>/src/**/*.test.ts', '<rootDir>/tests/**/*.spec.ts'],
   preset: 'ts-jest',
