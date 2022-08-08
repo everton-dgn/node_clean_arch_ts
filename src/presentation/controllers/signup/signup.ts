@@ -9,12 +9,12 @@ import {
 } from './signup-protocols'
 
 export class SignUpController implements Controller {
-  private readonly emailValidator: EmailValidator
-  private readonly addAccount: AddAccount
+  readonly #emailValidator: EmailValidator
+  readonly #addAccount: AddAccount
 
   constructor(emailValidator: EmailValidator, addAccount: AddAccount) {
-    this.emailValidator = emailValidator
-    this.addAccount = addAccount
+    this.#emailValidator = emailValidator
+    this.#addAccount = addAccount
   }
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
@@ -34,9 +34,9 @@ export class SignUpController implements Controller {
       if (password !== passwordConfirmation) {
         return badRequest(new InvalidParamError('passwordConfirmation'))
       }
-      const isValid = this.emailValidator.isValid(email)
+      const isValid = this.#emailValidator.isValid(email)
       if (!isValid) return badRequest(new InvalidParamError('email'))
-      const account = await this.addAccount.add({ name, email, password })
+      const account = await this.#addAccount.add({ name, email, password })
       return ok(account)
     } catch (error) {
       return serverError()
