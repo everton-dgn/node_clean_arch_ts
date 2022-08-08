@@ -18,22 +18,24 @@ const makeEmailValidator = (): EmailValidator => {
       return true
     }
   }
+
   return new EmailValidatorStub()
 }
 
 const makeAddAccount = (): AddAccount => {
   class AddAccountStub implements AddAccount {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    async add(account: AddAccountModel): Promise<AccountModel> {
+    add(account: AddAccountModel): Promise<AccountModel> {
       const fakeAccount = {
         id: 'valid_id',
         name: 'valid_name',
         email: 'valid_email@mail.com',
         password: 'valid_password'
       }
-      return new Promise(resolve => resolve(fakeAccount))
+      return Promise.resolve(fakeAccount)
     }
   }
+
   return new AddAccountStub()
 }
 
@@ -144,9 +146,7 @@ describe('SignUp Controller', () => {
 
   it('should call EmailValidator with correct email', async () => {
     const { sut, emailValidatorStub } = makeSut()
-    const isValidSpy = jest
-      .spyOn(emailValidatorStub, 'isValid')
-      .mockReturnValueOnce(false)
+    const isValidSpy = jest.spyOn(emailValidatorStub, 'isValid')
     const httpRequest = {
       body: {
         name: 'any_name',
