@@ -8,6 +8,6 @@ module.exports = {
     rootDir: root,
     displayName: 'unit-tests',
     setupFilesAfterEnv: ['<rootDir>/tests/setup.ts'],
-    testMatch: ['<rootDir>/src/**/*.test.ts']
+    testMatch: ['**/*.test.ts']
   }
 }

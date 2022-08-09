@@ -8,6 +8,6 @@ module.exports = {
     rootDir: root,
     displayName: 'integration-tests',
     setupFilesAfterEnv: ['<rootDir>/tests/setup.ts'],
-    testMatch: ['<rootDir>/tests/**/*.spec.ts']
+    testMatch: ['**/*.spec.ts']
   }
 }
