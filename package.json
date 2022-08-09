@@ -22,9 +22,9 @@
     "format": "prettier --write .",
     "check-format": "prettier --check .",
     "typecheck": "tsc --project tsconfig.json --noEmit",
-    "test": "jest --maxWorkers=50% --passWithNoTests --no-cache",
-    "test:watch": "jest --watch --maxWorkers=25% --passWithNoTests",
-    "test:unit": "jest --projects ./tests/config/jest-unit-config.js --maxWorkers=50% --passWithNoTests --no-cache",
+    "test": "jest --runInBand --passWithNoTests --no-cache",
+    "test:watch": "jest --watch --runInBand --passWithNoTests",
+    "test:unit": "jest --projects ./tests/config/jest-unit-config.js --runInBand --passWithNoTests --no-cache",
     "test:integration": "jest --projects ./tests/config/jest-integration-config.js --runInBand --passWithNoTests --no-cache",
     "check-update": "yarn upgrade-interactive --latest",
     "prepare": "husky install && chmod ug+x .husky/*"
