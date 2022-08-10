@@ -1,6 +1,6 @@
 import { Encrypter } from '@src/data/protocols'
-import { AddAccount, AddAccountModel } from '@src/domain/usecases'
 import { AccountModel } from '@src/domain/models'
+import { AddAccount, AddAccountModel } from '@src/domain/usecases'
 
 export class DbAddAccount implements AddAccount {
   constructor(
@@ -13,7 +13,6 @@ export class DbAddAccount implements AddAccount {
     const newAccountData = Object.assign({}, accountData, {
       password: hashedPassword
     })
-    await this.addAccountRepository.add(newAccountData)
-    return Promise.resolve(null)
+    return await this.addAccountRepository.add(newAccountData)
   }
 }
