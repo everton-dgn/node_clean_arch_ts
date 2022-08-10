@@ -1,10 +1,7 @@
+import { AccountModel } from '@src/domain/models'
+import { AddAccount, AddAccountModel } from '@src/domain/usecases'
+import { EmailValidator } from '@src/presentation/protocols'
 import { SignUpController } from '../signup'
-import {
-  AccountModel,
-  AddAccount,
-  AddAccountModel,
-  EmailValidator
-} from '../signup-protocols'
 import {
   InvalidParamError,
   MissingParamError,
