@@ -22,7 +22,7 @@ module.exports = {
   ],
   moduleFileExtensions: ['ts', 'js', 'json', 'node'],
   testMatch: ['<rootDir>/src/**/*.test.ts', '<rootDir>/tests/**/*.spec.ts'],
-  preset: 'ts-jest',
+  preset: '@shelf/jest-mongodb',
   transform: {
     '^.+\\.ts$': 'ts-jest'
   }
