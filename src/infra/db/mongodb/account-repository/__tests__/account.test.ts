@@ -1,20 +1,18 @@
 import { AccountMongoRepository } from '..'
 import { MongoHelper } from '@src/infra/db/mongodb/helpers'
 
-const url = process.env.MONGO_URL as string
-
 describe('Account Mongo Repository', () => {
   beforeAll(async () => {
-    await MongoHelper.connect(url)
-  })
-
-  afterAll(async () => {
-    await MongoHelper.disconnect()
+    await MongoHelper.connect()
   })
 
   beforeEach(async () => {
     const accountCollection = await MongoHelper.getCollection('accounts')
     await accountCollection.deleteMany({})
+  })
+
+  afterAll(async () => {
+    await MongoHelper.disconnect()
   })
 
   const makeSut = (): AccountMongoRepository => {

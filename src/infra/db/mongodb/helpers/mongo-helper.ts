@@ -1,23 +1,24 @@
 import { Collection, MongoClient } from 'mongodb'
+import { MongoMemoryServer } from 'mongodb-memory-server'
 
-const url = process.env.MONGO_URL as any
-
+let client: MongoClient
+let mongoServer: MongoMemoryServer
 export const MongoHelper = {
-  client: null as unknown as MongoClient,
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async connect(uri: string): Promise<void> {
-    this.client = await MongoClient.connect(url, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    })
+  async connect(): Promise<void> {
+    mongoServer = await MongoMemoryServer.create()
+    client = await MongoClient.connect(mongoServer.getUri(), {})
   },
 
   async disconnect(): Promise<void> {
-    await this.client.close()
+    await client.close()
   },
 
   getCollection(name: string): Collection {
-    return this.client.db().collection(name)
+    return client.db().collection(name)
+  },
+
+  map(collection: any): any {
+    const { _id, ...collectionWithoutId } = collection
+    return Object.assign({}, collectionWithoutId, { id: _id })
   }
 }
