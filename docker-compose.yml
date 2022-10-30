@@ -1,0 +1,36 @@
+version: '3'
+volumes:
+  log-data:
+services:
+
+  mongo:
+    container_name: mongo
+    image: mongo:4.2.1
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongo
+      MONGO_INITDB_ROOT_PASSWORD: mongo
+    volumes:
+      - ./mongodb-entrypoint.js:/docker-entrypoint-initdb.d/mongodb-entrypoint.js
+
+  redis:
+    container_name: redis
+    image: redis:6.0-alpine
+    command: redis-server
+    ports:
+      - 6379:6379
+
+  api-backend:
+    image: clean_arch:latest
+    # build:
+    #   dockerfile: Dockerfile.dev
+    #   context: ./
+    expose:
+      - 3000
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/usr/src/app
+    container_name: api-backend
+    hostname: api-backend
